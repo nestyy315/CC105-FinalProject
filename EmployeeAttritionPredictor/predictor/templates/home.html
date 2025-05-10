@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Employee Attrition Predictor</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #0d6efd, #0a58ca);
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            margin-right: 8px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+            color: #ffffff;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .btn-cta {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.05);
+        }
+
+        .about-section {
+            padding: 80px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .about-section p {
+            font-size: 1.15rem;
+            max-width: 850px;
+            margin: 0 auto;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .features-section {
+            padding: 70px 20px;
+            background-color: #f8f9fb;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .feature-box {
+            background: #ffffff;
+            border: none;
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-box i {
+            font-size: 2.8rem;
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-box p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        footer {
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0;
+        }
+
+        footer a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 767px) {
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i class="fas fa-user-tie"></i> Attrition Predictor</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <h1>Predict, Prevent, Prosper</h1>
+    <p>Leverage data-driven insights to reduce employee turnover and build a resilient workforce.</p>
+    <div class="mt-4">
+        <a href="{% url 'register' %}" class="btn btn-success btn-cta"><i class="fas fa-user-plus"></i> Register</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-light btn-cta"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<!-- About Section -->
+    <div class="about-section">
+        <h2>About the Project</h2>
+        <p>
+            The Employee Attrition Predictor leverages advanced machine learning algorithms to forecast which employees may leave. 
+            With this tool, organizations can analyze attrition trends, uncover root causes, and retain valuable talent more effectively.
+        </p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="row mt-4">
+                <div class="col-md-3 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-brain"></i>
+                        <h3>Accurate Predictions</h3>
+                        <p>Powered by XGBoost, delivering up to 75% prediction accuracy using real-world HR data.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Comprehensive Analysis</h3>
+                        <p>Analyze key factors like satisfaction, work environment, and compensation.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-user-friends"></i>
+                        <h3>User-Friendly Interface</h3>
+                        <p>Built with HR professionals in mind – no technical background required.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure & Scalable</h3>
+                        <p>Secure authentication with clean routing using Django’s backend infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Employee Attrition Predictor. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

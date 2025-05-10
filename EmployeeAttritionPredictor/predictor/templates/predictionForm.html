@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Predictor</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #f0f2f5, #e4ebf0);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .form-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-container h2 i {
+            color: #3498db;
+            margin-right: 10px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1 1 calc(50% - 20px);
+        }
+
+        label {
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            background-color: #3498db;
+            border: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .alert {
+            margin-top: 25px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#"><i class="fas fa-user-shield"></i> Attrition Predictor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <div class="container">
+        <div class="form-container">
+            <h2><i class="fas fa-briefcase-medical"></i> Employee Attrition Predictor</h2>
+            <form method="POST" action="{% url 'predictionResult' %}">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Age">Age</label>
+                        <!-- Example of modified input with placeholder -->
+                        <input type="number" class="form-control" id="Age" name="Age" required placeholder="Enter age">
+                    </div>
+                    <div class="form-group">
+                        <label for="Gender">Gender</label>
+                        <select class="form-control" id="Gender" name="Gender" required>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Years_at_Company">Years at Company</label>
+                        <input type="number" class="form-control" id="Years_at_Company" name="Years at Company" required placeholder="Years working at the company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Monthly_Income">Monthly Income</label>
+                        <input type="number" class="form-control" id="Monthly_Income" name="Monthly Income" required placeholder="Enter monthly income"required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Work_Life_Balance">Work-Life Balance</label>
+                        <select class="form-control" id="Work_Life_Balance" name="Work-Life Balance" required>
+                            <option value="0">Poor</option>
+                            <option value="1">Fair</option>
+                            <option value="2">Good</option>
+                            <option value="3">Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Job_Satisfaction">Job Satisfaction</label>
+                        <select class="form-control" id="Job_Satisfaction" name="Job Satisfaction" required>
+                            <option value="0">Low</option>
+                            <option value="1">Medium</option>
+                            <option value="2">High</option>
+                            <option value="3">Very High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Performance_Rating">Performance Rating</label>
+                        <select class="form-control" id="Performance_Rating" name="Performance Rating" required>
+                            <option value="0">Low</option>
+                            <option value="1">Below Average</option>
+                            <option value="2">Average</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Number_of_Promotions">Number of Promotions</label>
+                        <input type="number" class="form-control" id="Number_of_Promotions" name="Number of Promotions" required placeholder="Number of promotions received" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Overtime">Overtime</label>
+                        <select class="form-control" id="Overtime" name="Overtime" required>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Distance_from_Home">Distance from Home</label>
+                        <input type="number" class="form-control" id="Distance_from_Home" name="Distance from Home" required placeholder="Distance from home in miles" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Education_Level">Education Level</label>
+                        <select class="form-control" id="Education_Level" name="Education Level" required>
+                            <option value="0">High School</option>
+                            <option value="1">Associate</option>
+                            <option value="2">Bachelor's</option>
+                            <option value="3">Master's</option>
+                            <option value="4">PhD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Marital_Status">Marital Status</label>
+                        <select class="form-control" id="Marital_Status" name="Marital Status" required>
+                            <option value="0">Married</option>
+                            <option value="1">Single</option>
+                            <option value="2">Divorced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Number_of_Dependents">Number of Dependents</label>
+                        <input type="number" class="form-control" id="Number_of_Dependents" name="Number of Dependents" required placeholder="Enter number of dependents" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Job_Level">Job Level</label>
+                        <select class="form-control" id="Job_Level" name="Job Level" required>
+                            <option value="0">Entry</option>
+                            <option value="1">Mid</option>
+                            <option value="2">Senior</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Company_Size">Company Size</label>
+                        <select class="form-control" id="Company_Size" name="Company Size" required>
+                            <option value="0">Small</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Large</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Company_Tenure">Company Tenure (In Months)</label>
+                        <input type="number" class="form-control" id="Company_Tenure" name="Company Tenure (In Months)" required placeholder="Total Months at the company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Remote_Work">Remote Work</label>
+                        <select class="form-control" id="Remote_Work" name="Remote Work" required>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Company_Reputation">Company Reputation</label>
+                        <select class="form-control" id="Company_Reputation" name="Company Reputation" required>
+                            <option value="0">Poor</option>
+                            <option value="1">Fair</option>
+                            <option value="2">Good</option>
+                            <option value="3">Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Employee_Recognition">Employee Recognition</label>
+                        <select class="form-control" id="Employee_Recognition" name="Employee Recognition" required>
+                            <option value="0">Low</option>
+                            <option value="1">Medium</option>
+                            <option value="2">High</option>
+                            <option value="3">Very High</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+
+            <!-- Prediction result -->
+            {% if predictionResult %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Prediction Result</h4>
+                <p>{{ predictionResult }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Employee Attrition Predictor. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
